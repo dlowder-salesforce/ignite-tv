@@ -1,0 +1,77 @@
+diff --git a/node_modules/expo-constants/ios/EXConstants.podspec b/node_modules/expo-constants/ios/EXConstants.podspec
+index f97de45..eb82453 100644
+--- a/node_modules/expo-constants/ios/EXConstants.podspec
++++ b/node_modules/expo-constants/ios/EXConstants.podspec
+@@ -10,16 +10,11 @@ Pod::Spec.new do |s|
+   s.license        = package['license']
+   s.author         = package['author']
+   s.homepage       = package['homepage']
+-  s.platform       = :ios, '11.0'
++  s.platforms     = {:ios => '11.0', :tvos => '12.0'}
+   s.source         = { git: 'https://github.com/expo/expo.git' }
+ 
+   s.dependency 'UMCore'
+   s.dependency 'UMConstantsInterface'
+ 
+-  if !$ExpoUseSources&.include?(package['name']) && ENV['EXPO_USE_SOURCE'].to_i == 0 && File.exist?("#{s.name}.xcframework") && Gem::Version.new(Pod::VERSION) >= Gem::Version.new('1.10.0')
+-    s.source_files = "#{s.name}/**/*.h"
+-    s.vendored_frameworks = "#{s.name}.xcframework"
+-  else
+-    s.source_files = "#{s.name}/**/*.{h,m}"
+-  end
++  s.source_files = "#{s.name}/**/*.{h,m}"
+ end
+diff --git a/node_modules/expo-constants/ios/EXConstants/EXConstants.m b/node_modules/expo-constants/ios/EXConstants/EXConstants.m
+index 4c614b6..53b9ffd 100644
+--- a/node_modules/expo-constants/ios/EXConstants/EXConstants.m
++++ b/node_modules/expo-constants/ios/EXConstants/EXConstants.m
+@@ -3,10 +3,14 @@
+ #import <EXConstants/EXConstants.h>
+ #import <UMConstantsInterface/UMConstantsInterface.h>
+ 
++#if !TARGET_OS_TV
+ #import <WebKit/WKWebView.h>
++#endif
+ 
+ @interface EXConstants () {
++#if !TARGET_OS_TV
+   WKWebView *webView;
++#endif
+ }
+ 
+ @property (nonatomic, strong) NSString *webViewUserAgent;
+@@ -33,6 +37,7 @@ UM_REGISTER_MODULE();
+   return [_constantsService constants];
+ }
+ 
++#if !TARGET_OS_TV
+ UM_EXPORT_METHOD_AS(getWebViewUserAgentAsync,
+                     getWebViewUserAgentWithResolver:(UMPromiseResolveBlock)resolve
+                     rejecter:(UMPromiseRejectBlock)reject)
+@@ -62,5 +67,6 @@ UM_EXPORT_METHOD_AS(getWebViewUserAgentAsync,
+     }
+   });
+ }
++#endif
+ 
+ @end
+diff --git a/node_modules/expo-constants/ios/EXConstants/EXConstantsService.m b/node_modules/expo-constants/ios/EXConstants/EXConstantsService.m
+index d3b0bab..d523144 100644
+--- a/node_modules/expo-constants/ios/EXConstants/EXConstantsService.m
++++ b/node_modules/expo-constants/ios/EXConstants/EXConstantsService.m
+@@ -90,11 +90,15 @@ UM_REGISTER_MODULE();
+ 
+ - (CGFloat)statusBarHeight
+ {
++#if TARGET_OS_TV
++    return 0.0;
++#else
+   __block CGSize statusBarSize;
+   [UMUtilities performSynchronouslyOnMainThread:^{
+     statusBarSize = [UIApplication sharedApplication].statusBarFrame.size;
+   }];
+   return MIN(statusBarSize.width, statusBarSize.height);
++#endif
+ }
+ 
+ - (NSString *)iosVersion
