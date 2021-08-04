@@ -1,5 +1,5 @@
 import React from "react"
-import { ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
+import { ImageStyle, Platform, TextStyle, TVMenuControl, View, ViewStyle } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import {
@@ -135,6 +135,11 @@ export const DemoScreen = observer(function DemoScreen() {
     },
     [],
   )
+
+  React.useEffect(() => {
+    TVMenuControl.enableTVMenuKey()
+    return () => {}
+  })
 
   return (
     <View testID="DemoScreen" style={FULL}>

@@ -1,5 +1,5 @@
 import React from "react"
-import { View, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
+import { View, ViewStyle, TextStyle, TVMenuControl, ImageStyle, SafeAreaView } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Button, Header, Screen, Text, Wallpaper, AutoImage as Image } from "../../components"
@@ -80,6 +80,11 @@ const FOOTER_CONTENT: ViewStyle = {
 export const WelcomeScreen = observer(function WelcomeScreen() {
   const navigation = useNavigation()
   const nextScreen = () => navigation.navigate("demo")
+
+  React.useEffect(() => {
+    TVMenuControl.enableTVMenuKey()
+    return () => {}
+  })
 
   return (
     <View testID="WelcomeScreen" style={FULL}>

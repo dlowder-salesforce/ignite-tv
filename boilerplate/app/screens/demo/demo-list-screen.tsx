@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { FlatList, TextStyle, View, ViewStyle, ImageStyle } from "react-native"
+import { FlatList, TextStyle, TVMenuControl, View, ViewStyle, ImageStyle } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Header, Screen, Text, Wallpaper, AutoImage as Image } from "../../components"
@@ -53,6 +53,7 @@ export const DemoListScreen = observer(function DemoListScreen() {
       await characterStore.getCharacters()
     }
 
+    TVMenuControl.enableTVMenuKey()
     fetchData()
   }, [])
 
