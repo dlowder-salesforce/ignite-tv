@@ -25,6 +25,9 @@
     "clean": "react-native-clean-project",
     "clean-all": "npx react-native clean-project-auto"
   },
+  "resolutions": {
+    "@unimodules/core": "7.1.0"
+  },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "0.1.10",
@@ -38,7 +41,7 @@
     "mobx-react-lite": "3.2.0",
     "mobx-state-tree": "5.0.1",
     "react": "17.0.1",
-    "react-native": "https://github.com/react-native-tvos/react-native-tvos#tvos-v0.64.2",
+    "react-native": "npm:react-native-tvos@0.64.2-1",
     "react-native-gesture-handler": "1.10.3",
     "react-native-keychain": "6.2.0",
     "react-native-safe-area-context": "3.1.8",
@@ -54,6 +57,7 @@
     "@babel/plugin-proposal-decorators": "7.12.1",
     "@babel/plugin-proposal-optional-catch-binding": "7.12.1",
     "@babel/runtime": "^7.12.5",
+    "@react-native-community/cli": "^5.0.1",
     "@storybook/addon-storyshots": "6.1.10",
     "@storybook/react-native": "5.3.23",
     "@storybook/react-native-server": "5.3.23",
