@@ -26,14 +26,14 @@
     "clean-all": "npx react-native clean-project-auto"
   },
   "resolutions": {
-    "@unimodules/core": "7.1.0"
+    "@unimodules/core": "7.1.1"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.14.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "5.9.3",
     "@react-navigation/stack": "5.12.8",
-    "@unimodules/core": "7.1.0",
+    "@unimodules/core": "7.1.1",
     "apisauce": "2.0.0",
     "expo-localization": "9.1.0",
     "i18n-js": "3.8.0",
