@@ -1,9 +1,12 @@
 import React from "react"
-import { View, ViewStyle, TextStyle, TVMenuControl, ImageStyle, SafeAreaView } from "react-native"
-import { useNavigation } from "@react-navigation/native"
+import { View, ViewStyle, TextStyle, ImageStyle, SafeAreaView, TVMenuControl } from "react-native"
+import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Button, Header, Screen, Text, Wallpaper, AutoImage as Image } from "../../components"
 import { color, spacing, typography } from "../../theme"
+
+import "react-native/tvos-types.d"
+
 const bowserLogo = require("./bowser.png")
 
 const FULL: ViewStyle = { flex: 1 }
@@ -81,10 +84,13 @@ export const WelcomeScreen = observer(function WelcomeScreen() {
   const navigation = useNavigation()
   const nextScreen = () => navigation.navigate("demo")
 
-  React.useEffect(() => {
-    TVMenuControl.enableTVMenuKey()
-    return () => {}
-  })
+  useFocusEffect(
+    React.useCallback(() => {
+      TVMenuControl.disableTVMenuKey()
+
+      return () => {}
+    }, [nextScreen]),
+  )
 
   return (
     <View testID="WelcomeScreen" style={FULL}>
