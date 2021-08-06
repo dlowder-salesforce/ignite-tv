@@ -271,7 +271,9 @@ export default {
     } else {
       if (process.platform === "darwin") {
         command(`  npx react-native run-ios`)
-        command(`  npx react-native run-ios --scheme="${projectName}-tvOS" --simulator="Apple TV" # for Apple TV`)
+        command(
+          `  npx react-native run-ios --scheme="${projectName}-tvOS" --simulator="Apple TV" # for Apple TV`,
+        )
       }
       command(`  npx react-native run-android`)
       if (isAndroidInstalled(toolbox)) {
