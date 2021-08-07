@@ -1,5 +1,5 @@
 import React from "react"
-import { ImageStyle, Platform, TextStyle, TVMenuControl, View, ViewStyle } from "react-native"
+import ReactNative, { ImageStyle, Platform, TextStyle, View, ViewStyle } from "react-native"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import {
@@ -14,7 +14,7 @@ import {
 import { color, spacing } from "../../theme"
 import { Api } from "../../services/api"
 import { save } from "../../utils/storage"
-import "react-native/tvos-types.d"
+import "../../tvos-types.d"
 
 export const logoIgnite = require("./logo-ignite.png")
 export const heart = require("./heart.png")
@@ -140,9 +140,7 @@ export const DemoScreen = observer(function DemoScreen() {
 
   useFocusEffect(
     React.useCallback(() => {
-      TVMenuControl.enableTVMenuKey()
-
-      return () => {}
+      ReactNative.TVMenuControl && ReactNative.TVMenuControl.enableTVMenuKey()
     }, [navigation]),
   )
 

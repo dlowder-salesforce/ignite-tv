@@ -1,11 +1,11 @@
 import React from "react"
-import { View, ViewStyle, TextStyle, ImageStyle, SafeAreaView, TVMenuControl } from "react-native"
+import ReactNative, { View, ViewStyle, TextStyle, ImageStyle, SafeAreaView } from "react-native"
 import { useFocusEffect, useNavigation } from "@react-navigation/native"
 import { observer } from "mobx-react-lite"
 import { Button, Header, Screen, Text, Wallpaper, AutoImage as Image } from "../../components"
 import { color, spacing, typography } from "../../theme"
 
-import "react-native/tvos-types.d"
+import "../../tvos-types.d"
 
 const bowserLogo = require("./bowser.png")
 
@@ -86,9 +86,7 @@ export const WelcomeScreen = observer(function WelcomeScreen() {
 
   useFocusEffect(
     React.useCallback(() => {
-      TVMenuControl.disableTVMenuKey()
-
-      return () => {}
+      ReactNative.TVMenuControl && ReactNative.TVMenuControl.disableTVMenuKey()
     }, [nextScreen]),
   )
 
